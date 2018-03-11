@@ -1,0 +1,36 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "no-extra-semi":"error",
+        "max-len": "off",
+        "indent": ["error",4],
+        "no-underscore-dangle": "off",
+        "object-curly-newline": "off",
+        "react/jsx-indent": ["error", 4],
+        "react/forbid-prop-types": "off",
+        "react/jsx-filename-extension": "off",
+        "react/no-multi-comp": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "no-case-declarations": "off"
+    },
+    "extends": ["eslint:recommended","airbnb"]
+}
