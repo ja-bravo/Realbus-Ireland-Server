@@ -7,14 +7,16 @@ services:
       - .env
     volumes:
       - ~/elastic-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
     restart: on-failure
 
   server:
     build: ./
     volumes: 
-      - ./dist:/usr/src/app/dist
+      - ./src:/usr/src/app/src
     ports: 
-      - 3005:3005
+      - 3006:3006
     env_file:
       - .env
     depends_on:

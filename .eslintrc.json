@@ -23,6 +23,8 @@
         "max-len": "off",
         "indent": ["error",4],
         "no-underscore-dangle": "off",
+        "no-param-reassign": "off",
+        "class-methods-use-this": "off",
         "object-curly-newline": "off",
         "react/jsx-indent": ["error", 4],
         "react/forbid-prop-types": "off",
