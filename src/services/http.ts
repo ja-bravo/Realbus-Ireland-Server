@@ -1,7 +1,7 @@
-const axios = require('axios');
+import axios from "axios";
 
 const client = axios.create({
     baseURL: 'https://data.dublinked.ie/cgi-bin/rtpi',
 });
 
-module.exports = client;
+export default client;

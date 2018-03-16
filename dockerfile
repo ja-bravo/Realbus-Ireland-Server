@@ -9,8 +9,8 @@ COPY package.json /usr/src/app/
 
 RUN npm install
 
-COPY ./src /usr/src/app/src
+COPY ./dist /usr/src/app/dist
 
 EXPOSE 3006
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start-dev"]
