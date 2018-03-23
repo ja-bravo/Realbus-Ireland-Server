@@ -29,6 +29,14 @@ class StopsRouter {
                 .catch(next);
         });
     }
+    byKeyword(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const location = { lat: req.query.lat, lon: req.query.lon };
+            stops_1.default.getByKeyword(req.query.keyword, location)
+                .then(data => res.json(data))
+                .catch(next);
+        });
+    }
     byBounds(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const topLeft = { lat: req.query.topLat, lon: req.query.topLon };
@@ -42,9 +50,10 @@ class StopsRouter {
         this.router.get('/', this.getStops);
         this.router.get('/bounds', this.byBounds);
         this.router.get('/distance', this.byDistance);
+        this.router.get('/keyword', this.byKeyword);
     }
 }
 exports.StopsRouter = StopsRouter;
-const stopsRoutes = new StopsRouter();
-stopsRoutes.init();
-exports.default = stopsRoutes.router;
+const stopsRouter = new StopsRouter();
+stopsRouter.init();
+exports.default = stopsRouter.router;

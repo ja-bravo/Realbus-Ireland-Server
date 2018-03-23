@@ -21,6 +21,13 @@ export class StopsRouter {
         .catch(next);
     }
 
+    public async byKeyword(req: Request, res: Response, next: NextFunction) {
+        const location = {lat: req.query.lat, lon: req.query.lon};
+        backend.getByKeyword(req.query.keyword,location)
+        .then(data => res.json(data))
+        .catch(next);
+    }
+
     public async byBounds(req: Request, res: Response, next: NextFunction) {
         const topLeft =  {lat: req.query.topLat, lon: req.query.topLon};
         const bottomRight = {lat: req.query.botLat, lon: req.query.botLon};
@@ -34,11 +41,12 @@ export class StopsRouter {
         this.router.get('/',this.getStops);
         this.router.get('/bounds', this.byBounds);
         this.router.get('/distance', this.byDistance);
+        this.router.get('/keyword', this.byKeyword);
     }
 
 }
 
-const stopsRoutes = new StopsRouter();
-stopsRoutes.init();
+const stopsRouter = new StopsRouter();
+stopsRouter.init();
 
-export default stopsRoutes.router;
+export default stopsRouter.router;

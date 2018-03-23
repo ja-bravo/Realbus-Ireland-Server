@@ -13,12 +13,36 @@ class StopsBackend {
 
     }
 
+    async getByKeyword(keyword: string, location: {lat, lon}) {
+        let response = await elastic.search({
+            index: 'stops',
+            type: 'stop',
+            size: 10,
+            body: {
+                query: {
+                    match: {
+                        fullName: keyword
+                    }
+                },
+                sort: {
+                    _geo_distance: {
+                        location: location,
+                        order: "asc",
+                        unit: "km"
+                    }
+                }
+            }
+        });
+
+        return response.hits.hits;
+    }
+
     async getByDistance(opts: { lat, lon, distance }) {
         const { lat, lon, distance } = opts;
         let response = await elastic.search({
             index: 'stops',
             type: 'stop',
-            size: 10000,
+            size: 200,
             body: {
                 query: {
                     bool: {
@@ -29,6 +53,13 @@ class StopsBackend {
                                 location: { lat, lon }
                             }
                         }
+                    }
+                },
+                sort: {
+                    _geo_distance: {
+                        location: location,
+                        order: "asc",
+                        unit: "km"
                     }
                 }
             }
@@ -42,7 +73,7 @@ class StopsBackend {
         let response = await elastic.search({
             index: 'stops',
             type: 'stop',
-            size: 10000,
+            size: 200,
             body: {
                 query: {
                     bool: {

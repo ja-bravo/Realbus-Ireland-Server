@@ -22,6 +22,7 @@ Maybe get the closest stops from the result, show them and > details
 
 Saved stops/routes?
 
+Schedule: timetableinformation?type=day&stopid=523281&routeid=403 && _.uniqBy(t.results,'arrivaldatetime');
 Techs
 
 Backend:

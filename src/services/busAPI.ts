@@ -44,18 +44,17 @@ class BusAPI {
             });
 
             const stops = await this.getBusStops();
-            stops.forEach(stop => {
-                elastic.create({
+            console.dir(stops.length);
+            for (let i = 0; i < stops.length; i++) {
+                const stop = stops[i];
+                await elastic.create({
                     index: 'stops',
                     type: 'stop',
                     id: stop.id.toString(),
                     body: stop
-                }, (err, res) => {
-                    if (!err) {
-                        console.log(`Created Stop: ${stop.fullName}`);
-                    }
                 });
-            });
+                console.log(`Created Stop number: ${i+1}`);
+            }
         }
         catch (e) {
             console.dir(e);

@@ -20,13 +20,37 @@ class StopsBackend {
             return response.hits.hits;
         });
     }
+    getByKeyword(keyword, location) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let response = yield elastic_1.default.search({
+                index: 'stops',
+                type: 'stop',
+                size: 10,
+                body: {
+                    query: {
+                        match: {
+                            fullName: keyword
+                        }
+                    },
+                    sort: {
+                        _geo_distance: {
+                            location: location,
+                            order: "asc",
+                            unit: "km"
+                        }
+                    }
+                }
+            });
+            return response.hits.hits;
+        });
+    }
     getByDistance(opts) {
         return __awaiter(this, void 0, void 0, function* () {
             const { lat, lon, distance } = opts;
             let response = yield elastic_1.default.search({
                 index: 'stops',
                 type: 'stop',
-                size: 10000,
+                size: 200,
                 body: {
                     query: {
                         bool: {
@@ -37,6 +61,13 @@ class StopsBackend {
                                     location: { lat, lon }
                                 }
                             }
+                        }
+                    },
+                    sort: {
+                        _geo_distance: {
+                            location: location,
+                            order: "asc",
+                            unit: "km"
                         }
                     }
                 }
@@ -50,7 +81,7 @@ class StopsBackend {
             let response = yield elastic_1.default.search({
                 index: 'stops',
                 type: 'stop',
-                size: 10000,
+                size: 200,
                 body: {
                     query: {
                         bool: {
