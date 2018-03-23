@@ -65,7 +65,7 @@ class StopsBackend {
                     },
                     sort: {
                         _geo_distance: {
-                            location: location,
+                            location: { lat, lon },
                             order: "asc",
                             unit: "km"
                         }
