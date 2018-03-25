@@ -68,12 +68,13 @@ class StopsBackend {
         return response.hits.hits;
     }
 
-    async getByBounds(opts: { topLeft: { lat, lon }, bottomRight: { lat, lon } }) {
-        const { topLeft, bottomRight } = opts;
+    async getByBounds(opts: { topRight: { lat, lon }, bottomLeft: { lat, lon } }) {
+        const { topRight, bottomLeft } = opts;
+
         let response = await elastic.search({
             index: 'stops',
             type: 'stop',
-            size: 200,
+            size: 2000,
             body: {
                 query: {
                     bool: {
@@ -81,8 +82,8 @@ class StopsBackend {
                         filter: {
                             geo_bounding_box: {
                                 location: {
-                                    top_left: topLeft,
-                                    bottom_right: bottomRight,
+                                    top_right: topRight,
+                                    bottom_left: bottomLeft,
                                 }
                             }
                         }
@@ -91,7 +92,7 @@ class StopsBackend {
             }
         });
 
-        return response.hits.hits;
+        return response.hits.hits.map(stop => stop._source);
     }
 }
 

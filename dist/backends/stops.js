@@ -77,11 +77,11 @@ class StopsBackend {
     }
     getByBounds(opts) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { topLeft, bottomRight } = opts;
+            const { topRight, bottomLeft } = opts;
             let response = yield elastic_1.default.search({
                 index: 'stops',
                 type: 'stop',
-                size: 200,
+                size: 2000,
                 body: {
                     query: {
                         bool: {
@@ -89,8 +89,8 @@ class StopsBackend {
                             filter: {
                                 geo_bounding_box: {
                                     location: {
-                                        top_left: topLeft,
-                                        bottom_right: bottomRight,
+                                        top_right: topRight,
+                                        bottom_left: bottomLeft,
                                     }
                                 }
                             }
@@ -98,7 +98,7 @@ class StopsBackend {
                     }
                 }
             });
-            return response.hits.hits;
+            return response.hits.hits.map(stop => stop._source);
         });
     }
 }

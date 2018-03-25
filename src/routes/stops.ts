@@ -29,10 +29,10 @@ export class StopsRouter {
     }
 
     public async byBounds(req: Request, res: Response, next: NextFunction) {
-        const topLeft =  {lat: req.query.topLat, lon: req.query.topLon};
-        const bottomRight = {lat: req.query.botLat, lon: req.query.botLon};
+        const topRight =  {lat: req.query.topLat, lon: req.query.topLon};
+        const bottomLeft = {lat: req.query.botLat, lon: req.query.botLon};
 
-        backend.getByBounds({topLeft,bottomRight})
+        backend.getByBounds({topRight,bottomLeft})
         .then(data => res.json(data))
         .catch(next);
     }

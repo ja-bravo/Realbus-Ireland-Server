@@ -39,9 +39,9 @@ class StopsRouter {
     }
     byBounds(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const topLeft = { lat: req.query.topLat, lon: req.query.topLon };
-            const bottomRight = { lat: req.query.botLat, lon: req.query.botLon };
-            stops_1.default.getByBounds({ topLeft, bottomRight })
+            const topRight = { lat: req.query.topLat, lon: req.query.topLon };
+            const bottomLeft = { lat: req.query.botLat, lon: req.query.botLon };
+            stops_1.default.getByBounds({ topRight, bottomLeft })
                 .then(data => res.json(data))
                 .catch(next);
         });
