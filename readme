@@ -1,0 +1,36 @@
+https://data.smartdublin.ie/dataset/c9df9a0b-d17a-40ff-a5d4-01da0cf08617/resource/4b9f2c4f-6bf5-4958-a43a-f12dab04cf61/download/rtpirestapispecification.pdf
+
+/realtimebusinformation Description Method to retrieve real time bus information for given stop number and route
+/timetableinformation Timetable information for given stop number and route 
+/busstopinformation Get all the stops or one in specific. stopid: stop ID
+/routeinformation Get origin, destination and stops. route: routeID, operator: op reference
+/routelistinformation Get the routes. operator: Operator reference to filter
+/operatorinformation Get the operators
+
+Features
+
+Bus stops next to me/in the map
+    Detail: Route, bus stop, destination, origin, due time, time walking from my position
+        Detail: From (stop, time), to(destination, time), stops, route on map through the stops
+
+Get me there: How to get to a destination
+Auto complete: https://api.tiles.mapbox.com/geocoding/v5/mapbox.places/eyre%20square.json?access_token=pk.eyJ1IjoiamFicmF2byIsImEiOiJjamV2YmVyeDcwOGthMnhzMjQwdWgwdXl6In0.ln4GWqJHdPCIQJDXgmXF3Q&country=IE
+Maybe get the closest stops from the result, show them and > details
+    Lis of routes
+        Detail: Route, closest bus stop, destination, origin, due time, time walking from my position
+            Detail: From (stop, time), to(destination, time), stops, route on map through the stops
+
+Saved stops/routes?
+
+Schedule: timetableinformation?type=day&stopid=523281&routeid=403 && _.uniqBy(t.results,'arrivaldatetime');
+Techs
+
+Backend:
+    Express, elasticsearch
+
+Mobile:
+    React native
+
+Desktop?:
+    React
+    
